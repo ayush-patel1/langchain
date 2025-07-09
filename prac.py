@@ -11,8 +11,24 @@ prompt=PromptTemplate(
 )
 prompt.format(name="socks")
 
+prompt_template_name=PromptTemplate(
+    input_variables=["cuisine"],
+    template="What are some good food items from {cuisine} cuisine?",
+)
+name_chain = LLMChain(llm=llm, prompt=prompt)
+
+prompt_template_items=PromptTemplate(
+    input_variables=["cuisine"],
+    template="What are some good food items from {cuisine} cuisine?",
+)
+food_items_chain = LLMChain(llm=llm, prompt=prompt_template_items)
 
 from langchain.chains import LLMChain
 
 chain = LLMChain(llm=llm, prompt=prompt)
 chain.run("colorful socks")
+
+from langchain.chains import SimpleSequentialChain
+chain= SimpleSequentialChain(chains=[name_chain, food_items_chain])
+response=chain.run("Indian")
+print(response)
