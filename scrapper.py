@@ -47,3 +47,12 @@ sentences=["My name is Ayush Patel and i am a software engineer",
 encoder=SentenceTransformer('all-mpnet-base-v2')
 vectors=encoder.encode(sentences)  #this will create embeddings for the sentences
 vectors.shape #this will give you the shape of the vectors created
+dim=vectors.shape[1]  #this will give you the dimension of the vectors created
+
+import faiss
+index=faiss.IndexFlatL2(dim)  #indexing for faster access
+index.add(vectors)
+search_query="I am learning about LangChain and LLMs"
+
+vec=encoder.encode(search_query)
+vec.shape  #this will give you the shape of the vector created for the search query
