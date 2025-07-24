@@ -28,8 +28,8 @@ def generate_resturant_name_and_items(cuisine):
         verbose=True
     )
     response = chain.run({'cuisine': cuisine})
-    print(response)
-    return{
+    print(response)  
+    return{  
         'resturant_name': 'curry delight',
         'menu_items': ['curry', 'naan', 'biryani']
     }
