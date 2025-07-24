@@ -38,3 +38,12 @@ r_splitter = RecursiveCharacterTextSplitter(
     chunk_size=200, chunk_overlap=0)
 chunks=r_splitter.split_text(data)
 len(chunks) #this will give you the number of chunks created 
+
+
+from sentence_transformers import SentenceTransformer
+sentences=["My name is Ayush Patel and i am a software engineer",
+           "I am learning about LangChain and LLMs",
+           "I am also learning about vector databases and embeddings"]
+encoder=SentenceTransformer('all-mpnet-base-v2')
+vectors=encoder.encode(sentences)  #this will create embeddings for the sentences
+vectors.shape #this will give you the shape of the vectors created
