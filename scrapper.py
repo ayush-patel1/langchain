@@ -56,3 +56,11 @@ search_query="I am learning about LangChain and LLMs"
 
 vec=encoder.encode(search_query)
 vec.shape  #this will give you the shape of the vector created for the search query
+
+
+import numpy  as np
+svec=np.array(vec).reshape(1, -1)  #reshaping the vector to match the index
+D, I = index.search(svec, k=2)  #searching for the top 2 similar vectors
+print("Distances:", D)  #this will give you the distances
+print("Indices:", I)  #this will give you the indices of the top 2
+print("Sentences:", [sentences[i] for i in I[0]])  #
