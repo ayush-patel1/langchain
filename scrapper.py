@@ -64,3 +64,12 @@ D, I = index.search(svec, k=2)  #searching for the top 2 similar vectors
 print("Distances:", D)  #this will give you the distances
 print("Indices:", I)  #this will give you the indices of the top 2
 print("Sentences:", [sentences[i] for i in I[0]])  #
+
+
+chain=RetrivalQWithSourcesChain.from_llm(llm=llm,retriver=vectorIndex.as_retriever(),
+                                    return_source_documents=True)
+chain
+
+query="what is the price of tiago icng"
+langchain.debug=T  rue;
+chain({question:query},return_only_outputs=True)
